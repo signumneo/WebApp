@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Process Information - Linked with MongoDB Collection</title>
+		<style>
+			th {
+				font-weight: bold;
+			}
+
+			table {
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			th,
+			td {
+				border: 1px solid rgb(224, 130, 130);
+				padding: 5px;
+				text-align: center;
+			}
+
+			th {
+				font-weight: bold;
+				color: white;
+				background-color: rgb(102, 6, 6);
+			}
+
+			th:nth-child(3),
+			th:nth-child(4),
+			th:nth-child(5),
+			th:nth-child(6),
+			th:nth-child(12) {
+				width: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<caption>
+				<strong>Process Information</strong>
+			</caption>
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>EType</th>
+					<th>ID</th>
+					<th>Fb</th>
+					<th>P1</th>
+					<th>P2</th>
+					<th>P3</th>
+					<th>P4</th>
+					<th>P5</th>
+					<th>P6</th>
+					<th>P7</th>
+					<th>P8</th>
+					<th>P9</th>
+					<th>P10</th>
+					<th>P11</th>
+					<th>P12</th>
+					<th>P13</th>
+					<th>P14</th>
+					<th>P15</th>
+					<th>P16</th>
+					<th>P17</th>
+					<th>P18</th>
+					<th>P19</th>
+					<th>P20</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for row in data %}
+				<tr>
+					<td>{{loop.index}}</td>
+					<td>{{ row['EType'] }}</td>
+					<td>{{ row['Id'] }}</td>
+					<td>{{ row['Fb'] }}</td>
+					<td>{{ row['P1'] }}</td>
+					<td>{{ row['P2'] }}</td>
+					<td>{{ row['P3'] }}</td>
+					<td>{{ row['P4'] }}</td>
+					<td>{{ row['P5'] }}</td>
+					<td>{{ row['P6'] }}</td>
+					<td>{{ row['P7'] }}</td>
+					<td>{{ row['P8'] }}</td>
+					<td>{{ row['P9'] }}</td>
+					<td>{{ row['P10'] }}</td>
+					<td>{{ row['P11'] }}</td>
+					<td>{{ row['P12'] }}</td>
+					<td>{{ row['P13'] }}</td>
+					<td>{{ row['P14'] }}</td>
+					<td>{{ row['P15'] }}</td>
+					<td>{{ row['P16'] }}</td>
+					<td>{{ row['P17'] }}</td>
+					<td>{{ row['P18'] }}</td>
+					<td>{{ row['P19'] }}</td>
+					<td>{{ row['P20'] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>
