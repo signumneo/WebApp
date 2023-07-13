@@ -1,6 +1,6 @@
 ########################################################################### Application V.1 ############################################################################################
 # Import the necessary libraries and modules.
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, flash
 import sqlite3
 
 ### Notes: Importing pymongo used for communication with MongoDB.
@@ -73,6 +73,136 @@ def dashboard():
     )
 
 
+@app.route("/create", methods=["POST"])
+def create():
+    etype = request.form.get("etype")
+    job_id = request.form.get("job_id")
+    fb = request.form.get("fb")
+    p1 = request.form.get("p1")
+    p2 = request.form.get("p2")
+    p3 = request.form.get("p3")
+    p4 = request.form.get("p4")
+    p5 = request.form.get("p5")
+    p6 = request.form.get("p6")
+    p7 = request.form.get("p7")
+    p8 = request.form.get("p8")
+    p9 = request.form.get("p9")
+    p10 = request.form.get("p10")
+    p11 = request.form.get("p11")
+    p12 = request.form.get("p12")
+    p13 = request.form.get("p13")
+    p14 = request.form.get("p14")
+    p15 = request.form.get("p15")
+    p16 = request.form.get("p16")
+    p17 = request.form.get("p17")
+    p18 = request.form.get("p18")
+    p19 = request.form.get("p19")
+    p20 = request.form.get("p20")
+
+    collection.insert_one(
+        {
+            "EType": etype,
+            "Id": job_id,
+            "Fb": fb,
+            "P1": p1,
+            "P2": p2,
+            "P3": p3,
+            "P4": p4,
+            "P5": p5,
+            "P6": p6,
+            "P7": p7,
+            "P8": p8,
+            "P9": p9,
+            "P10": p10,
+            "P11": p11,
+            "P12": p12,
+            "P13": p13,
+            "P14": p14,
+            "P15": p15,
+            "P16": p16,
+            "P17": p17,
+            "P18": p18,
+            "P19": p19,
+            "P20": p20,
+        }
+    )
+
+    cursor.execute(
+        "INSERT INTO message_information (EType, Id, Fb, P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, P20) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (
+            etype,
+            job_id,
+            fb,
+            p1,
+            p2,
+            p3,
+            p4,
+            p5,
+            p6,
+            p7,
+            p8,
+            p9,
+            p10,
+            p11,
+            p12,
+            p13,
+            p14,
+            p15,
+            p16,
+            p17,
+            p18,
+            p19,
+            p20,
+        ),
+    )
+    flash("Data added successfully to the database")
+    try:
+        conn.commit()
+        print("Data committed successfully to SQLite database")
+    except sqlite3.Error as e:
+        print("Error occurred during data commit:", e)
+
+    return redirect("/")
+
+
+@app.route("/read", methods=["POST"])
+def read():
+    fb = request.form.get("fb")
+    p1 = request.form.get("p1")
+    p2 = request.form.get("p2")
+    p3 = request.form.get("p3")
+
+    job_mongodb = collection.find_one({"Fb": fb, "P1": p1, "P2": p2, "P3": p3})
+    cursor.execute(
+        "SELECT * FROM message_information WHERE Fb = ? AND P1 = ? AND P2 = ? AND P3 = ?",
+        (fb, p1, p2, p3),
+    )
+    job_sqlite = cursor.fetchone()
+
+    return render_template(
+        "popup.html", data_mongodb=job_mongodb, data_sqlite=job_sqlite
+    )
+
+
+@app.route("/update/<id>", methods=["POST"])
+def update(id):
+    new_data = request.form.get("new_data")
+    collection.update_one({"_id": id}, {"$set": {"data": new_data}})
+    cursor.execute(
+        "UPDATE message_information SET data = ? WHERE id = ?", (new_data, id)
+    )
+    conn.commit()
+    return redirect("/")
+
+
+@app.route("/delete/<Fb>", methods=["POST"])
+def delete(Fb):
+    collection.delete_one({"Fb": Fb})
+    cursor.execute("DELETE FROM message_information WHERE Fb = ?", (Fb,))
+    conn.commit()
+    return redirect("/")
+
+
 """
 @app.route("/newuser")
 def new_user():
@@ -123,6 +253,7 @@ def create_user():
 def logout():
     session.clear()
     return redirect("/")
+
 """
 
 # Running the app
