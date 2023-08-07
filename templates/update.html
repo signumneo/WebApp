@@ -1,0 +1,231 @@
+<!-- Code for the Update form -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Update Entry</title>
+		<style>
+			body {
+				background-color: #abb9cd;
+				color: #000;
+				font-family: Arial, sans-serif;
+			}
+
+			.container {
+				width: 400px;
+				margin: 20px auto;
+				padding: 20px;
+				background-color: #6377a5; /* Changed form background color */
+				border-radius: 5px;
+				text-align: center;
+			}
+
+			h1 {
+				color: #fff;
+				margin-top: 0;
+			}
+
+			label {
+				display: block;
+				margin-top: 10px;
+				color: #fff;
+			}
+
+			input[type="text"],
+			input[type="number"] {
+				width: 100%;
+				padding: 8px;
+				margin-top: 5px;
+				border: none;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+
+			input[type="submit"] {
+				width: 100%;
+				padding: 10px;
+				margin-top: 20px;
+				background-color: #1301e4;
+				border: none;
+				color: #fff;
+				cursor: pointer;
+			}
+
+			input[type="submit"]:hover {
+				background-color: #1301e4;
+			}
+
+			.update-form {
+				margin-top: 40px;
+			}
+
+			.cancel-button {
+				background-color: #f44336;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Update Entry</h1>
+
+			<!-- Defining the elements of the form -->
+
+			<form action="/update" method="post">
+				<label for="etype">EType</label>
+				<input type="number" name="etype" id="etype" required />
+
+				<label for="p1">P1</label>
+				<input type="number" name="p1" id="p1" required />
+
+				<label for="p2">P2</label>
+				<input type="text" name="p2" id="p2" required />
+
+				<label for="p3">P3</label>
+				<input type="text" name="p3" id="p3" required />
+
+				<label for="database">Database:</label>
+				<select name="database" id="database" required>
+					<option value="mongodb">MongoDB</option>
+					<option value="sqlite">SQLite</option>
+					<option value="both">Both</option>
+				</select>
+
+				<input type="submit" name="retrieve_submit" value="Retrieve" />
+			</form>
+
+			<!-- Display existing data if available -->
+			{% if data_mongodb or data_sqlite %}
+			<h2>Existing Data:</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>EType</th>
+						<th>Id</th>
+						<th>Fb</th>
+						<th>P1</th>
+						<th>P2</th>
+						<th>P3</th>
+						<th>P4</th>
+						<th>P5</th>
+						<th>P6</th>
+						<th>P7</th>
+						<th>P8</th>
+						<th>P9</th>
+						<th>P10</th>
+						<th>P11</th>
+						<th>P12</th>
+						<th>P13</th>
+						<th>P14</th>
+						<th>P15</th>
+						<th>P16</th>
+						<th>P17</th>
+						<th>P18</th>
+						<th>P19</th>
+						<th>P20</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for entry in data_mongodb %}
+					<tr>
+						<td>{{ entry.EType }}</td>
+						<td>{{ entry.Id }}</td>
+						<td>{{ entry.Fb }}</td>
+						<td>{{ entry.P1 }}</td>
+						<td>{{ entry.P2 }}</td>
+						<td>{{ entry.P3 }}</td>
+						<td>{{ entry.P4 }}</td>
+						<td>{{ entry.P5 }}</td>
+						<td>{{ entry.P6 }}</td>
+						<td>{{ entry.P7 }}</td>
+						<td>{{ entry.P8 }}</td>
+						<td>{{ entry.P9 }}</td>
+						<td>{{ entry.P10 }}</td>
+						<td>{{ entry.P11 }}</td>
+						<td>{{ entry.P12 }}</td>
+						<td>{{ entry.P13 }}</td>
+						<td>{{ entry.P14 }}</td>
+						<td>{{ entry.P15 }}</td>
+						<td>{{ entry.P16 }}</td>
+						<td>{{ entry.P17 }}</td>
+						<td>{{ entry.P18 }}</td>
+						<td>{{ entry.P19 }}</td>
+						<td>{{ entry.P20 }}</td>
+					</tr>
+					{% endfor %} {% for entry in data_sqlite %}
+					<tr>
+						<td>{{ entry[0] }}</td>
+						<td>{{ entry[1] }}</td>
+						<td>{{ entry[2] }}</td>
+						<td>{{ entry[3] }}</td>
+						<td>{{ entry[4] }}</td>
+						<td>{{ entry[5] }}</td>
+						<td>{{ entry[6] }}</td>
+						<td>{{ entry[7] }}</td>
+						<td>{{ entry[8] }}</td>
+						<td>{{ entry[9] }}</td>
+						<td>{{ entry[10] }}</td>
+						<td>{{ entry[11] }}</td>
+						<td>{{ entry[12] }}</td>
+						<td>{{ entry[13] }}</td>
+						<td>{{ entry[14] }}</td>
+						<td>{{ entry[15] }}</td>
+						<td>{{ entry[16] }}</td>
+						<td>{{ entry[17] }}</td>
+						<td>{{ entry[18] }}</td>
+						<td>{{ entry[19] }}</td>
+						<td>{{ entry[20] }}</td>
+						<td>{{ entry[21] }}</td>
+						<td>{{ entry[22] }}</td>
+						<td>{{ entry[23] }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<!-- Form for updating data -->
+			<form
+				action="/update"
+				method="post"
+				{%
+				if
+				confirmation
+				%}class="update-form"
+				{%
+				endif
+				%}>
+				<input type="hidden" name="etype" value="{{ etype }}" />
+				<input type="hidden" name="p1" value="{{ p1 }}" />
+				<input type="hidden" name="p2" value="{{ p2 }}" />
+				<input type="hidden" name="p3" value="{{ p3 }}" />
+				<input type="hidden" name="database" value="{{ database }}" />
+
+				<label for="new_etype">New EType:</label>
+				<input type="number" name="new_etype" id="new_etype" required />
+
+				<label for="new_p1">New P1:</label>
+				<input type="number" name="new_p1" id="new_p1" required />
+
+				<label for="new_p2">New P2:</label>
+				<input type="text" name="new_p2" id="new_p2" required />
+
+				<label for="new_p3">New P3:</label>
+				<input type="text" name="new_p3" id="new_p3" required />
+
+				<label for="new_database">New Database:</label>
+				<select name="new_database" id="new_database" required>
+					<option value="mongodb">MongoDB</option>
+					<option value="sqlite">SQLite</option>
+					<option value="both">Both</option>
+				</select>
+
+				<input type="submit" name="update_submit" value="Update" />
+				<input
+					type="submit"
+					name="cancel_submit"
+					value="Cancel"
+					class="cancel-button" />
+			</form>
+
+			{% endif %}
+		</div>
+	</body>
+</html>

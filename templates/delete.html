@@ -1,0 +1,103 @@
+<!-- Code for the Delete form -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Delete Entry</title>
+		<style>
+			body {
+				background-color: #abb9cd;
+				color: #000;
+				font-family: Arial, sans-serif;
+			}
+
+			.container {
+				width: 400px;
+				margin: 20px auto;
+				padding: 20px;
+				background-color: #6377a5; /* Changed form background color */
+				border-radius: 5px;
+				text-align: center;
+			}
+
+			h1 {
+				color: #fff;
+				margin-top: 0;
+			}
+
+			label {
+				display: block;
+				margin-top: 10px;
+				color: #fff;
+			}
+
+			input[type="text"],
+			input[type="number"] {
+				width: 100%;
+				padding: 8px;
+				margin-top: 5px;
+				border: none;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+
+			input[type="submit"] {
+				width: 100%;
+				padding: 10px;
+				margin-top: 20px;
+				background-color: #1301e4;
+				border: none;
+				color: #fff;
+				cursor: pointer;
+			}
+
+			input[type="submit"]:hover {
+				background-color: #1301e4;
+			}
+
+			.flash {
+				margin-top: 20px;
+				padding: 10px;
+				background-color: #f44336;
+				color: #fff;
+			}
+
+			.flash p {
+				margin: 0;
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Delete Entry</h1>
+
+			<!-- Defining the elements of the form -->
+
+			<form action="/delete" method="post">
+				<label for="database">Database</label>
+				<select name="database" id="database" required>
+					<option value="mongodb">MongoDB</option>
+					<option value="sqlite">SQLite</option>
+				</select>
+
+				<label for="P1">P1</label>
+				<input type="number" name="P1" id="P1" required />
+
+				<input type="submit" value="Submit" />
+			</form>
+
+			{% with messages = get_flashed_messages() %} {% if messages %}
+			<div class="flash">
+				{% for message in messages %}
+				<p>{{ message }}</p>
+				{% endfor %}
+			</div>
+			{% endif %} {% endwith %}
+		</div>
+	</body>
+	<script>
+		setTimeout(function () {
+			document.querySelector(".flash").style.display = "none";
+		}, 5000);
+	</script>
+</html>

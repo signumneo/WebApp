@@ -1,0 +1,182 @@
+<!-- Code for the Read form -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Read Entry</title>
+		<style>
+			body {
+				background-color: #abb9cd;
+				color: #000;
+				font-family: Arial, sans-serif;
+			}
+
+			.container {
+				width: 400px;
+				margin: 20px auto;
+				padding: 20px;
+				background-color: #6377a5; /* Changed form background color */
+				border-radius: 5px;
+				text-align: center;
+			}
+
+			h1 {
+				color: #fff;
+				margin-top: 0;
+			}
+
+			label {
+				display: block;
+				margin-top: 10px;
+				color: #fff;
+			}
+
+			input[type="text"],
+			input[type="number"] {
+				width: 100%;
+				padding: 8px;
+				margin-top: 5px;
+				border: none;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+
+			input[type="submit"] {
+				width: 100%;
+				padding: 10px;
+				margin-top: 20px;
+				background-color: #1301e4;
+				border: none;
+				color: #fff;
+				cursor: pointer;
+			}
+
+			input[type="submit"]:hover {
+				background-color: #1301e4;
+			}
+
+			table {
+				width: 100%;
+				margin-top: 100px;
+				align: center;
+				right-margin: 80px;
+				border-width: 10px;
+			}
+
+			th,
+			td {
+				padding: 8px;
+				text-align: center;
+				border-bottom: 1px solid #ddd;
+				background-color: #838996; /* Changed table cell background color */
+				color: #fff; /* Changed table cell text color */
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Read Entry</h1>
+
+			<!-- Defining the elements of the form -->
+			
+			<form action="/read" method="post">
+				<label for="etype">EType</label>
+				<input type="number" name="etype" id="etype" required />
+
+				<label for="p1">P1</label>
+				<input type="number" name="p1" id="p1" required />
+
+				<label for="p2">P2</label>
+				<input type="text" name="p2" id="p2" required />
+
+				<input type="submit" value="Submit" />
+			</form>
+		</div>
+		{% if data_mongodb or data_sqlite %}
+		<table>
+			<thead>
+				<tr>
+					<th>EType</th>
+					<th>Id</th>
+					<th>Fb</th>
+					<th>P1</th>
+					<th>P2</th>
+					<th>P3</th>
+					<th>P4</th>
+					<th>P5</th>
+					<th>P6</th>
+					<th>P7</th>
+					<th>P8</th>
+					<th>P9</th>
+					<th>P10</th>
+					<th>P11</th>
+					<th>P12</th>
+					<th>P13</th>
+					<th>P14</th>
+					<th>P15</th>
+					<th>P16</th>
+					<th>P17</th>
+					<th>P18</th>
+					<th>P19</th>
+					<th>P20</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for entry in data_mongodb %}
+				<tr>
+					<td>{{ entry.EType }}</td>
+					<td>{{ entry.Id }}</td>
+					<td>{{ entry.Fb }}</td>
+					<td>{{ entry.P1 }}</td>
+					<td>{{ entry.P2 }}</td>
+					<td>{{ entry.P3 }}</td>
+					<td>{{ entry.P4 }}</td>
+					<td>{{ entry.P5 }}</td>
+					<td>{{ entry.P6 }}</td>
+					<td>{{ entry.P7 }}</td>
+					<td>{{ entry.P8 }}</td>
+					<td>{{ entry.P9 }}</td>
+					<td>{{ entry.P10 }}</td>
+					<td>{{ entry.P11 }}</td>
+					<td>{{ entry.P12 }}</td>
+					<td>{{ entry.P13 }}</td>
+					<td>{{ entry.P14 }}</td>
+					<td>{{ entry.P15 }}</td>
+					<td>{{ entry.P16 }}</td>
+					<td>{{ entry.P17 }}</td>
+					<td>{{ entry.P18 }}</td>
+					<td>{{ entry.P19 }}</td>
+					<td>{{ entry.P20 }}</td>
+				</tr>
+				{% endfor %} {% for entry in data_sqlite %}
+				<tr>
+					<td>{{ entry[0] }}</td>
+					<td>{{ entry[1] }}</td>
+					<td>{{ entry[2] }}</td>
+					<td>{{ entry[3] }}</td>
+					<td>{{ entry[4] }}</td>
+					<td>{{ entry[5] }}</td>
+					<td>{{ entry[6] }}</td>
+					<td>{{ entry[7] }}</td>
+					<td>{{ entry[8] }}</td>
+					<td>{{ entry[9] }}</td>
+					<td>{{ entry[10] }}</td>
+					<td>{{ entry[11] }}</td>
+					<td>{{ entry[12] }}</td>
+					<td>{{ entry[13] }}</td>
+					<td>{{ entry[14] }}</td>
+					<td>{{ entry[15] }}</td>
+					<td>{{ entry[16] }}</td>
+					<td>{{ entry[17] }}</td>
+					<td>{{ entry[18] }}</td>
+					<td>{{ entry[19] }}</td>
+					<td>{{ entry[20] }}</td>
+					<td>{{ entry[21] }}</td>
+					<td>{{ entry[22] }}</td>
+					<td>{{ entry[23] }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+	</body>
+</html>

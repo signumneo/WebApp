@@ -1,0 +1,112 @@
+<!-- Code for the Create form -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Create Entry</title>
+		<style>
+			body {
+			    background-color: #ABB9CD;
+			    color: #fff;
+			    font-family: Arial, sans-serif;
+			}
+
+			.container {
+			    width: 400px;
+			    margin: 20px auto;
+			    padding: 20px;
+			    background-color: #6377A5; /* Updated to red (139, 0, 0) */
+			    border-radius: 5px;
+			    text-align: center;
+			}
+
+			h1 {
+			    color: #fff;
+			    margin-top: 0;
+				font-weight: bold;
+			}
+
+			label {
+			    display: block;
+			    margin-top: 10px;
+			    color: #fff;
+				font-weight: bold;
+			}
+
+			input[type="text"],
+			select {
+			    width: 100%;
+			    padding: 8px;
+			    margin-top: 5px;
+			    border: none;
+			    border-radius: 3px;
+			    box-sizing: border-box;
+			}
+
+			input[type="submit"] {
+			    width: 100%;
+			    padding: 10px;
+			    margin-top: 20px;
+			    background-color: #1301E4;
+			    border: none;
+			    color: #fff;
+			    cursor: pointer;
+				font-weight: bold;
+			}
+
+			input[type="submit"]:hover {
+			    background-color: #1301E4;
+			}
+
+			.flash {
+				width: 100%;
+				background-color: #f9f9f9
+			    padding: 20px;
+			    color: #000;
+				text-align: center;
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 9999;
+			    display: {% if messages %}block{% else %}none{% endif %}; /* Hide if no messages */
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Create Entry</h1>
+			{% with messages = get_flashed_messages() %} {% if messages %}
+			<div class="flash">
+				{% for message in messages %} {{ message }}<br />
+				{% endfor %}
+			</div>
+			{% endif %} {% endwith %}
+			<form action="/create" method="post">
+				<label for="database">Select Database:</label>
+				<select name="database" id="database">
+					<option value="mongodb">MongoDB</option>
+					<option value="sqlite">SQLite</option>
+					<option value="both">Both</option>
+				</select>
+
+				<!-- Defining the elements of the form -->
+
+				<label for="etype">EType</label>
+				<input type="number" name="etype" id="etype" required />
+
+				<label for="Id">Id</label>
+				<input type="number" name="Id" id="Id" required />
+
+				<label for="Fb">Fb</label>
+				<input type="number" name="Fb" id="Fb" required />
+
+				<label for="p1">Job ID</label>
+				<input type="number" name="p1" id="p1" required />
+
+				<label for="p2">Case ID</label>
+				<input type="text" name="p2" id="p2" required />
+
+				<input type="submit" value="Submit" />
+			</form>
+		</div>
+	</body>
+</html>
